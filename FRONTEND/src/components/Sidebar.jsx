@@ -11,9 +11,13 @@ const Sidebar = () => {
     useEffect(() => {
         getUsers();
     }, [getUsers]);
+    // const filteredUsers = showOnlineOnly
+    //     ? users.filter(user => onlineUsers.includes(user._id))
+    //     : users;
+    const safeUsers = Array.isArray(users) ? users : [];
     const filteredUsers = showOnlineOnly
-        ? users.filter(user => onlineUsers.includes(user._id))
-        : users;
+        ? safeUsers.filter(user => onlineUsers.includes(user._id))
+        : safeUsers;
 
     if (isUserLoading) {
         return (
